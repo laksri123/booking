@@ -1,5 +1,5 @@
-import  express from "express";
-import dotenv from "dotenv"
+import express from "express";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoute from "./routes/auth.js";
 import hotelRoute from "./routes/hotel.js";
@@ -10,22 +10,27 @@ import cors from "cors";
 
 const app = express();
 dotenv.config();
-const connect = async  () => {
-try {
+const connect = async () => {
+  try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("connected to mongodb");
   } catch (error) {
-    throw(error);
+    throw error;
   }
 };
 
- mongoose.connection.on("disconnected", () =>{
-   console.log("disconnected from mongodb");
- })
+mongoose.connection.on("disconnected", () => {
+  console.log("disconnected from mongodb");
+});
+const corsOptions = {
+  origin: "https://dancing-jalebi-eab587.netlify.app", // Allow only this origin
+  methods: "GET,POST,PUT,DELETE", // Allow these HTTP methods
+  allowedHeaders: "Content-Type,Authorization", // Allow these headers
+  credentials: true, // Allow cookies and credentials
+};
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
-
 
 app.use("/api/auth", authRoute);
 app.use("/api/hotel", hotelRoute);
@@ -44,7 +49,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(8800, () => {
-    connect();
-    console.log("connedted to port!!");
-})
+  connect();
+  console.log("connedted to port!!");
+});
 // pLabrS8hCKeu4sJs
