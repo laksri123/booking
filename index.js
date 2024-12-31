@@ -23,7 +23,7 @@ mongoose.connection.on("disconnected", () => {
   console.log("disconnected from mongodb");
 });
 const corsOptions = {
-  origin: "https://dancing-jalebi-eab587.netlify.app", // Allow only this origin
+  origin: "https://gleaming-parfait-57f067.netlify.app/", // Allow only this origin
   methods: "GET,POST,PUT,DELETE", // Allow these HTTP methods
   allowedHeaders: "Content-Type,Authorization", // Allow these headers
   credentials: true, // Allow cookies and credentials
